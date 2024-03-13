@@ -48,7 +48,6 @@ object FormMain: TFormMain
     Lines.Strings = (
       'mmOutput')
     TabOrder = 0
-    ExplicitHeight = 350
   end
   object txtKeyName: TEdit
     Left = 79
@@ -92,21 +91,23 @@ object FormMain: TFormMain
     Caption = 'Search by Subkey2:'
     TabOrder = 5
   end
-  object Button1: TButton
+  object btBufferOverruns: TButton
     Left = 24
     Top = 231
     Width = 241
     Height = 25
-    Caption = 'Memory Leak some TObject Descendents'
+    Caption = 'Attempt Buffer Over-Runs'
     TabOrder = 6
+    OnClick = btBufferOverrunsClick
   end
-  object Button2: TButton
+  object btAccessUnitializedInterface: TButton
     Left = 24
     Top = 262
     Width = 241
     Height = 25
-    Caption = 'Access an Uninitialized Class'
+    Caption = 'Access an Interface Incorrectly'
     TabOrder = 7
+    OnClick = btAccessUnitializedInterfaceClick
   end
   object btAccessUnitializedObject: TButton
     Left = 24
@@ -128,7 +129,7 @@ object FormMain: TFormMain
   end
   object btCreateFileInWinSys: TButton
     Left = 24
-    Top = 427
+    Top = 419
     Width = 241
     Height = 25
     Caption = 'Create a File in Win/System32'

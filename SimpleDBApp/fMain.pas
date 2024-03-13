@@ -18,8 +18,8 @@ type
     Label2: TLabel;
     txtSubKey2: TEdit;
     cbIncludeSubKey2: TCheckBox;
-    Button1: TButton;
-    Button2: TButton;
+    btBufferOverruns: TButton;
+    btAccessUnitializedInterface: TButton;
     btAccessUnitializedObject: TButton;
     btnRunCommand: TButton;
     btCreateFileInWinSys: TButton;
@@ -35,6 +35,8 @@ type
     procedure btnRunCommandClick(Sender: TObject);
     procedure btCreateFileInWinSysClick(Sender: TObject);
     procedure btAccessUnitializedObjectClick(Sender: TObject);
+    procedure btAccessUnitializedInterfaceClick(Sender: TObject);
+    procedure btBufferOverrunsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,6 +54,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses uScottsInterfaces;
 
 //------------------------------------------------------------------------------
 // Run a DOS program and retrieve its output dynamically while it is running.
@@ -192,6 +196,41 @@ begin
 end;
 
 //------------------------------------------------------------------------------
+procedure TFormMain.btBufferOverrunsClick(Sender: TObject);
+var
+  A : array[1..100] of char;
+  i, j : integer;
+  sl : TStringList;
+begin
+  AddToLog('');
+  AddToLog('Trying a static array overrun...');
+  try
+    j := 0;
+    for i := 1 to 100 do begin
+      // A[i] := 'F';
+      j := j + Ord(A[i]);
+    end;
+    AddToLog('J = ' + IntToStr(J));
+  except
+    AddToLog('Exception on static array overrun');
+  end;
+
+  AddToLog('Trying a dynamic list overrun...');
+  // sl := TStringList.Create;
+  try
+    for i := 1 to 100 do begin
+      sl.Add(IntToStr(i) + ' - ' + IntToStr(Random(10000)));
+    end;
+    AddToLog('Entry at place 90: ' + sl[90]);
+    AddToLog('Entry at place 110: ' + sl[110]);
+  except
+    AddToLog('Exception on dynamic list overrun');
+  end;
+
+
+end;
+
+//------------------------------------------------------------------------------
 procedure TFormMain.btnRunCommandClick(Sender: TObject);
 var
   sCommand, sPath, sResult : string;
@@ -214,6 +253,8 @@ var
 begin
   sl := TStringList.Create;
   sl.Text := 'Test file. Delete when you want';
+  sPath := 'C:\Windows\System32\_tempfile.exe';
+  sl.SaveToFile(sPath);
   sPath := 'C:\Windows\System32\_tempfile.exe';
   sl.SaveToFile(sPath);
 
@@ -240,6 +281,21 @@ begin
     AddToLog('Well... ' + IntToStr(n1) + ' + ' + IntToStr(n2) + ' = ' + IntToStr(n3));
   except
     AddToLog('AddToNumbers Exception');
+  end;
+end;
+
+//------------------------------------------------------------------------------
+procedure TFormMain.btAccessUnitializedInterfaceClick(Sender: TObject);
+var
+  Scott: IScottInterface;
+  s : string;
+begin
+  // Showmessage(Scott.GetSomeResult);
+  try
+    s := Scott.GetSomeResult;
+    AddToLog('Scott.GetSomeResult: ' + s);
+  finally
+    AddToLog('Exception on Scott.GetSomeResult');
   end;
 end;
 

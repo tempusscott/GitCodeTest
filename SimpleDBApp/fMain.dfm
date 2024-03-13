@@ -2,7 +2,7 @@ object FormMain: TFormMain
   Left = 0
   Top = 0
   Caption = 'Testing GIT Repository'
-  ClientHeight = 366
+  ClientHeight = 486
   ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object FormMain: TFormMain
   OnShow = FormShow
   DesignSize = (
     610
-    366)
+    486)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -27,26 +27,32 @@ object FormMain: TFormMain
   end
   object Label2: TLabel
     Left = 24
-    Top = 187
+    Top = 171
     Width = 127
     Height = 13
     Caption = 'SubKey2 (Phone Number):'
+  end
+  object Label3: TLabel
+    Left = 24
+    Top = 358
+    Width = 51
+    Height = 13
+    Caption = 'Command:'
   end
   object mmOutput: TMemo
     Left = 300
     Top = 8
     Width = 302
-    Height = 350
+    Height = 470
     Anchors = [akTop, akRight, akBottom]
     Lines.Strings = (
       'mmOutput')
     TabOrder = 0
-    ExplicitLeft = 307
-    ExplicitHeight = 351
+    ExplicitHeight = 350
   end
   object txtKeyName: TEdit
-    Left = 24
-    Top = 118
+    Left = 79
+    Top = 96
     Width = 121
     Height = 21
     TabOrder = 1
@@ -71,20 +77,71 @@ object FormMain: TFormMain
     OnClick = btnSearchForRecordsClick
   end
   object txtSubKey2: TEdit
-    Left = 24
-    Top = 206
-    Width = 145
+    Left = 168
+    Top = 168
+    Width = 97
     Height = 21
     TabOrder = 4
     Text = '2608294124'
   end
   object cbIncludeSubKey2: TCheckBox
     Left = 24
-    Top = 161
+    Top = 137
     Width = 169
     Height = 17
     Caption = 'Search by Subkey2:'
     TabOrder = 5
+  end
+  object Button1: TButton
+    Left = 24
+    Top = 231
+    Width = 241
+    Height = 25
+    Caption = 'Memory Leak some TObject Descendents'
+    TabOrder = 6
+  end
+  object Button2: TButton
+    Left = 24
+    Top = 262
+    Width = 241
+    Height = 25
+    Caption = 'Access an Uninitialized Class'
+    TabOrder = 7
+  end
+  object btAccessUnitializedObject: TButton
+    Left = 24
+    Top = 293
+    Width = 241
+    Height = 25
+    Caption = 'Access an Uninitialized TObject'
+    TabOrder = 8
+    OnClick = btAccessUnitializedObjectClick
+  end
+  object btnRunCommand: TButton
+    Left = 24
+    Top = 324
+    Width = 241
+    Height = 25
+    Caption = 'Run a CMD Command'
+    TabOrder = 9
+    OnClick = btnRunCommandClick
+  end
+  object btCreateFileInWinSys: TButton
+    Left = 24
+    Top = 427
+    Width = 241
+    Height = 25
+    Caption = 'Create a File in Win/System32'
+    TabOrder = 10
+    OnClick = btCreateFileInWinSysClick
+  end
+  object txtCommand: TEdit
+    Left = 88
+    Top = 355
+    Width = 177
+    Height = 21
+    TabOrder = 11
+    Text = 'dir /b /a-d | find /c /v ""'
   end
   object ADOQuery: TADOQuery
     Connection = ADOConnection

@@ -152,8 +152,8 @@ object FormMain: TFormMain
   end
   object ADOConnection: TADOConnection
     ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=tempus;Persist Security Info=True;U' +
-      'ser ID=tempus;Initial Catalog=RetailNetDev;Data Source=pmdevdb.t' +
+      'Provider=SQLOLEDB.1;Password=NOTAPASSWORD;Persist Security Info=True;U' +
+      'ser ID=admin;Initial Catalog=RetailNetDev;Data Source=pmdevdb.t' +
       'empus.local;Use Procedure for Prepare=1;Auto Translate=True;Pack' +
       'et Size=4096;Workstation ID=TEMPUSDEV;Use Encryption for Data=Fa' +
       'lse'
